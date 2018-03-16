@@ -10,7 +10,7 @@ export default new Router({
     component: () => import('@/components/module1/index')
   }, {
     path: '/p2',
-    name: 'index',
+    name: 'module2',
     component: () => import('@/components/module2/index')
   }]
 })
