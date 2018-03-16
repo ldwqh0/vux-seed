@@ -86,6 +86,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
+    new webpack.NoEmitOnErrorsPlugin()
     // keep module.id stable when vender modules does not change
     // new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting

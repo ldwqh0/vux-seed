@@ -17,7 +17,7 @@ const createLintingRule = () => ({
   }
 })
 
-let webpackConfig = {
+const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: utils.resolve('src/main.js')
@@ -68,8 +68,6 @@ let webpackConfig = {
     ]
   }
 }
-
-module.exports = webpackConfig
 
 module.exports = vuxLoader.merge(webpackConfig, {
   plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
