@@ -6,6 +6,7 @@ import App from './App'
 import store from './vuex'
 import './config/http'
 
+console.log('Create by ldwqh0@outlook.com')
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
