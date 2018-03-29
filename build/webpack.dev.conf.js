@@ -7,14 +7,28 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const vueLoaderConfig = require('./vue-loader.conf')
+const vuxLoader = require('vux-loader')
+const mode = 'development'//模式
 
-const devWebpackConfig = merge(baseWebpackConfig, {
+const _devWebpackConfig = merge(baseWebpackConfig, {
+  mode,
+  output: {
+    publicPath: config.dev.assetsPublicPath
+  },
   module: {
-    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
+    rules: [
+      ...utils.styleLoaders({
+        sourceMap: config.dev.cssSourceMap,
+        usePostCSS: true
+      }), {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig(mode)
+      }]
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
-  mode: 'development',//模式
   // these devServer options should be customized in /config/index.js
   devServer: {
     clientLogLevel: 'warning',
@@ -50,6 +64,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: true
     }),
   ]
+})
+
+const devWebpackConfig = vuxLoader.merge(_devWebpackConfig, {
+  plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
 })
 
 module.exports = new Promise((resolve, reject) => {

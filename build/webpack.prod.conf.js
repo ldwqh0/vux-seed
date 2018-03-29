@@ -10,22 +10,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const vuxLoader = require('vux-loader')
 
 const env = require('../config/prod.env')
-
-const webpackConfig = merge(baseWebpackConfig, {
+const mode = 'production'//模式
+const _webpackConfig = merge(baseWebpackConfig, {
+  mode,
   output: {
     path: config.build.assetsRoot,
+    publicPath: config.build.assetsPublicPath,
     filename: utils.assetsPath('js/[name].js?_=[chunkhash]'),
     chunkFilename: utils.assetsPath('js/[id].js?_=[chunkhash]')
   },
-  mode: 'production',//模式
   module: {
-    rules: utils.styleLoaders({
+    rules: [...utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
       usePostCSS: true
-    })
+    }), {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: vueLoaderConfig(mode)
+    }]
   },
   optimization: {
     minimize: true,
@@ -116,5 +122,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 //   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 //   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 // }
-
+const webpackConfig = vuxLoader.merge(_webpackConfig, {
+  plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
+})
 module.exports = webpackConfig
