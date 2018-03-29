@@ -32,7 +32,12 @@ const _devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     clientLogLevel: 'warning',
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [{
+        from: /./,
+        to: config.dev.assetsPublicPath
+      }]
+    },
     hot: true,
     compress: true,
     host: process.env.HOST || config.dev.host,
