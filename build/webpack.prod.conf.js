@@ -70,7 +70,7 @@ const _webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DefinePlugin({
       'process.env': env,
-      'CONTEXT_PATH': config.build.assetsPublicPath
+      'CONTEXT_PATH':JSON.stringify(config.build.assetsPublicPath)
     }),
     new MiniCssExtractPlugin({
       path: utils.assetsPath('css'),
