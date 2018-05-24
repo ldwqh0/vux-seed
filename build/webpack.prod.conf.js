@@ -11,6 +11,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const vuxLoader = require('vux-loader')
+const vueLoaderConfig = require('./vue-loader.conf')
 
 const env = require('../config/prod.env')
 const mode = 'production'//模式
