@@ -5,12 +5,13 @@ import router from './config/router'
 import App from './App'
 import store from './vuex'
 import './config/http'
+import './config/arcgis.config'
+// import esriPlugin from 'vue-esri'
 
 console.log('Create by ldwqh0@outlook.com')
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   router,

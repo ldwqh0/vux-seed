@@ -6,14 +6,15 @@
     </h2>
     <group>
       <x-input title="姓名" :is-type="be1233" v-model="user.name"/>
-      <x-input v-model="user.age" />
+      <x-input v-model="user.age"/>
     </group>
   </div>
 </template>
 <script>
-  import {Component} from 'vue-property-decorator'
-  import {Group, XInput} from 'vux'
+  import { Component } from 'vue-property-decorator'
+  import { Group, XInput } from 'vux'
   import Vue from 'vue'
+
   @Component({
     components: {
       Group,
@@ -21,10 +22,11 @@
     }
   })
   export default class Module2 extends Vue {
-    user={
+    user = {
       name: '张三',
       age: 14
     }
+
     be1233 (val) {
       return {
         valid: val === '1233',

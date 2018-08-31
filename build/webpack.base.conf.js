@@ -2,6 +2,7 @@
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
+// const ArcGISPlugin = require('@arcgis/webpack-plugin')
 
 // 创建eslint规则
 const createLintingRule = () => ({
@@ -53,6 +54,7 @@ module.exports = {
         }
       }]
   }
+  // plugins: [new ArcGISPlugin()]
 }
 
 
