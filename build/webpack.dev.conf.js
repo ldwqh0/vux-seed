@@ -91,7 +91,7 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${config.dev.host}:${port}`],
+          messages: [`Your application is running here: http://${config.dev.host}:${port}${config.dev.assetsPublicPath}`],
         },
         onErrors: config.dev.notifyOnErrors
           ? utils.createNotifierCallback()

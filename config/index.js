@@ -9,10 +9,9 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/env/', // 项目发布路径，必须以 '/'结尾
     proxyTable: {
-      '/matrix/matrix/': 'http://hbbgw.leadingsoft.cn',
-      '/matrix/static/icons/': 'http://hbbgw.leadingsoft.cn'
+      // 这里写入开发阶段反向代理列表
     },
 
     // Various Dev Server settings
@@ -58,7 +57,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/env/',
 
     /**
      * Source Maps
