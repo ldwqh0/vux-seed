@@ -10,7 +10,7 @@ const portfinder = require('portfinder')
 const vueLoaderConfig = require('./vue-loader.conf')
 const vuxLoader = require('vux-loader')
 const mode = 'development'//模式
-const ArcGISPlugin = require('@arcgis/webpack-plugin')
+// const ArcGISPlugin = require('@arcgis/webpack-plugin')
 
 const _devWebpackConfig = merge(baseWebpackConfig, {
   mode,
@@ -60,7 +60,7 @@ const _devWebpackConfig = merge(baseWebpackConfig, {
       'process.env': require('../config/dev.env'),
       'CONTEXT_PATH': JSON.stringify(config.dev.assetsPublicPath)
     }),
-    new ArcGISPlugin(),
+    // new ArcGISPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     // new webpack.NoEmitOnErrorsPlugin(),
