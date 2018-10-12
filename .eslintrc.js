@@ -3,6 +3,9 @@
 module.exports = {
   root: true,
   parserOptions: {
+    ecmaFeatures: {
+      legacyDecorators: true
+    },
     parser: 'babel-eslint'
   },
   env: {
@@ -35,7 +38,7 @@ module.exports = {
         'allowFirstLine': true
       }
     }],
-    'vue/script-indent': ['error', 2, {'baseIndent': 1}],
+    'vue/script-indent': ['error', 2, { 'baseIndent': 1 }],
     'indent': 'off'
   }
 }
