@@ -7,7 +7,7 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const vuxLoader = require('vux-loader')
@@ -48,6 +48,11 @@ const _webpackConfig = merge(baseWebpackConfig, {
           sourceMap: true,
           mangle: false //
         }
+      }),
+      // 压缩css文件
+      new OptimizeCSSAssetsPlugin({
+        // 采用了文件名后接查询参数的方式解决缓存问题，再打包的时候，css压缩找不到正确的文件名了，需要重新配置规则
+        assetNameRegExp: /\.css\?_=[a-z0-9]*$/g
       })
     ]
   },
@@ -71,7 +76,7 @@ const _webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DefinePlugin({
       'process.env': env,
-      'CONTEXT_PATH':JSON.stringify(config.build.assetsPublicPath)
+      'CONTEXT_PATH': JSON.stringify(config.build.assetsPublicPath)
     }),
     new MiniCssExtractPlugin({
       path: utils.assetsPath('css'),
@@ -79,12 +84,7 @@ const _webpackConfig = merge(baseWebpackConfig, {
       chunkFilename: utils.assetsPath('css/[id].css?_=[chunkhash]')
     }),
     new webpack.NoEmitOnErrorsPlugin(),
-    //压缩css文件
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: config.build.productionSourceMap
-        ? {safe: true, map: {inline: false}}
-        : {safe: true}
-    }),
+
     // 复制静态资源到目录中，如果有更多需要复制的资源，请在这里添加
     new CopyWebpackPlugin([
       {
@@ -94,35 +94,9 @@ const _webpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     new webpack.NoEmitOnErrorsPlugin()
-    // keep module.id stable when vender modules does not change
-    // new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
-    // new webpack.optimize.ModuleConcatenationPlugin()
   ]
 })
 
-// if (config.build.productionGzip) {
-//   const CompressionWebpackPlugin = require('compression-webpack-plugin')
-//
-//   webpackConfig.plugins.push(
-//     new CompressionWebpackPlugin({
-//       asset: '[path].gz[query]',
-//       algorithm: 'gzip',
-//       test: new RegExp(
-//         '\\.(' +
-//         config.build.productionGzipExtensions.join('|') +
-//         ')$'
-//       ),
-//       threshold: 10240,
-//       minRatio: 0.8
-//     })
-//   )
-// }
-//
-// if (config.build.bundleAnalyzerReport) {
-//   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-//   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-// }
 const webpackConfig = vuxLoader.merge(_webpackConfig, {
   plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
 })
