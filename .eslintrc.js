@@ -38,6 +38,20 @@ module.exports = {
         'allowFirstLine': true
       }
     }],
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/html-closing-bracket-spacing': ['error', {
+      'startTag': 'never',
+      'endTag': 'never',
+      'selfClosingTag': 'never'
+    }],
+    'vue/html-closing-bracket-newline': ['error', {
+      'singleline': 'never',
+      'multiline': 'never'
+    }],
+    // 使用kebab-case模式的组件规则
+    'vue/component-name-in-template-casing': ['error', 'kebab-case', {
+      'ignores': []
+    }],
     'vue/script-indent': ['error', 2, { 'baseIndent': 1 }],
     'indent': 'off'
   }
